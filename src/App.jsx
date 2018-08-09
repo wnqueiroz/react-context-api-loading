@@ -5,6 +5,13 @@ import Users from './components/Users'
 
 import './index.css'
 
+const LoadingContext = React.createContext({
+	loading: false,
+	message: null,
+	showMessage: message => { },
+	hideLoading: () => { }
+})
+
 class App extends Component {
 	render() {
 		return (
