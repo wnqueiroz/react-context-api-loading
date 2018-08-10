@@ -1,6 +1,4 @@
-import React, { Component, Fragment } from 'react'
-
-import Loading from './Loading'
+import React, { Component } from 'react'
 
 import { getUsers } from '../services/api'
 
@@ -11,22 +9,20 @@ class Users extends Component {
     }
 
     getUsers = async () => {
-        this.setState({ loading: true })
+        const { showLoading, hideLoading } = this.props
+
+        showLoading('Carregando usuários')
+
         const response = await getUsers().then(response => {
-            this.setState({ loading: false })
+            hideLoading()
             return response
         })
         console.log({ response })
     }
 
     render() {
-        const { loading } = this.state
-
         return (
-            <Fragment>
-                <button onClick={this.getUsers}>Buscar usuários</button>
-                <Loading loading={loading} message='Carregando usuários...' />
-            </Fragment>
+            <button onClick={this.getUsers}>Buscar usuários</button>
         )
     }
 }
